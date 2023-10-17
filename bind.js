@@ -1,5 +1,10 @@
 "use strict"
 
+/**
+ * Usage contexts of Javasript bind keyword
+ */
+
+// Define Object 1
 const obj1 = {
     name: "James",
     grossPay: 10000,
@@ -10,6 +15,7 @@ const obj1 = {
     }
 }
 
+// Define Object 2
 const obj2 = {
     name: "Henry",
     grossPay: 20000,
@@ -21,13 +27,14 @@ const obj2 = {
 }
 
 /**
- * Define external / custom netPay function, don't use arrow functions because the 'this' context in the arrow functions is captured
- * from global scope not to the specified object scope hence you wont get the desired behavior. Thus this.name will be undefined.
+ * Define external / custom netPay function. Don't use arrow functions because the 'this' context of the arrow function is captured
+ * from global scope not to the specified object scope hence you wont get the desired behavior. Thus we end up  having this.property undefined.
  */
 
 const netPay = function () {
     return `${this.name} gets ${this.grossPay - this.NSSF*this.grossPay - this.PAYE*this.grossPay + 750}`
 }
+
 
 const bind1 = netPay.bind(obj1) // Use custom netPay function with obj1 properties, this is pointing to obj1 values
 const bind2 = obj2.getNetPay.bind(obj1) // Use obj2 getNetPay function with obj1 property values, this is pointing to obj1 values
